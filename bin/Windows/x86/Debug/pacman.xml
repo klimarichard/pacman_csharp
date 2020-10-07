@@ -1,0 +1,2004 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>pacman</name>
+    </assembly>
+    <members>
+        <member name="T:pacman.EntityManager">
+            <summary>
+            <c>EntityManager</c> is a class that holds all entities present
+            in current game. It contains methods for handling events
+            happening to entities.
+            </summary>
+        </member>
+        <member name="M:pacman.EntityManager.#ctor(pacman.Handler,pacman.PacMan)">
+            <summary>
+            Constructor of <c>EntityManager</c> class takes the game
+            handler for having access to the game map and its
+            elements and an instance of <c>PacMan</c>.
+            It also initializes the list of entities.
+            </summary>
+            <param name="handler">game handler for accessing other
+                                  elements of the game</param>
+            <param name="pacMan">instance of PacMan character</param>
+        </member>
+        <member name="M:pacman.EntityManager.addFood(pacman.Entity)">
+            <summary>
+            Adds food to the list of entities.
+            Food is always added to the front of the list,
+            in order to render it first.
+            </summary>
+            <param name="e">instance of Entity (this method is only
+                            called when the instance is of type
+                            Food)</param>
+        </member>
+        <member name="M:pacman.EntityManager.addMoving(pacman.Entity)">
+            <summary>
+            Adds moving entity to the list of entities.
+            Moving entities are always added to the rear of
+            the list, in order to render them last.
+            </summary>
+            <param name="e">instance of Entity (this method is only
+                            called when the instance is of type
+                            Moving)</param>
+        </member>
+        <member name="M:pacman.EntityManager.tick">
+            <summary>
+            Ensures that all entities in the list of entities
+            perform their tick method.
+            </summary>
+        </member>
+        <member name="M:pacman.EntityManager.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Ensures that all entities in the list of entities
+            perform their render method.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="M:pacman.EntityManager.getHandler">
+            <summary>
+            Gets game handler.
+            </summary>
+            <returns>game handler</returns>
+        </member>
+        <member name="M:pacman.EntityManager.setHandler(pacman.Handler)">
+            <summary>
+            Sets game handler.
+            </summary>
+            <param name="handler">new game handler</param>
+        </member>
+        <member name="M:pacman.EntityManager.getPacMan">
+            <summary>
+            Gets PacMan.
+            </summary>
+            <returns>PacMan</returns>
+        </member>
+        <member name="M:pacman.EntityManager.getPacManEater">
+            <summary>
+            Gets the enemy, which is currently eating PacMan.
+            </summary>
+            <returns>enemy currently eatin PacMan</returns>
+        </member>
+        <member name="M:pacman.EntityManager.setPacManEater(pacman.Enemy)">
+            <summary>
+            Sets the enemy, which is currently eating PacMan.
+            </summary>
+            <param name="pacManEater">new PacMan eater</param>
+        </member>
+        <member name="M:pacman.EntityManager.getPinkie">
+            <summary>
+            Gets the pink enemy.
+            </summary>
+            <returns>the pink enemy</returns>
+        </member>
+        <member name="M:pacman.EntityManager.setPinkie(pacman.EnemyPink)">
+            <summary>
+            Sets the pink enemy.
+            </summary>
+            <param name="pinkie">new pink enemy</param>
+        </member>
+        <member name="M:pacman.EntityManager.getEntities">
+            <summary>
+            Gets the list of entities.
+            </summary>
+            <returns>the list of entities</returns>
+        </member>
+        <member name="M:pacman.EntityManager.setEntities(System.Collections.Generic.List{pacman.Entity})">
+            <summary>
+            Sets the list of entities.
+            </summary>
+            <param name="entities">new list of entities</param>
+        </member>
+        <member name="T:pacman.Entity">
+            <summary>
+            <c>Entity</c> is an abstract class for all different types
+            of entities in the game.
+            </summary>
+        </member>
+        <member name="M:pacman.Entity.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of abstract entity class always called
+            by all entities present in game. It takes the game handler
+            for having access to the game map and its elements,
+            an x-coordinate and a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles.
+            
+            It also sets local variables, x and y-coordinates in map
+            tiles and the bounding rectangle.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.Entity.checkCollisions(System.Single,System.Single)">
+            <summary>
+            Checks if this entity collides with any other entity.
+            </summary>
+            <param name="xOff">x-coordinate to be checked</param>
+            <param name="yOff">y-coordinate to be checked</param>
+            <returns>entity colliding with this entity, or <c>null</c>, if there aren't any collisions</returns>
+        </member>
+        <member name="M:pacman.Entity.getBounds(System.Single,System.Single)">
+            <summary>
+            Calculates bounds of this entity with offsets in
+            both directions.
+            </summary>
+            <param name="xOff">x axis offset</param>
+            <param name="yOff">y axis offset</param>
+            <returns>bounding rectangle of this offset entity</returns>
+        </member>
+        <member name="M:pacman.Entity.getX">
+            <summary>
+            Gets x-coordinate of this entity.
+            </summary>
+            <returns>x-coordinate of this entity</returns>
+        </member>
+        <member name="M:pacman.Entity.setX(System.Single)">
+            <summary>
+            Sets x-coordinate of this entity.
+            </summary>
+            <param name="x">new x-coordinate</param>
+        </member>
+        <member name="M:pacman.Entity.getY">
+            <summary>
+            Gets y-coordinate of this entity.
+            </summary>
+            <returns>y-coordinate of this entity</returns>
+        </member>
+        <member name="M:pacman.Entity.setY(System.Single)">
+            <summary>
+            Sets y-coordinate of this entity.
+            </summary>
+            <param name="y">new y-coordinate</param>
+        </member>
+        <member name="M:pacman.Entity.isActive">
+            <summary>
+            Gets entity's active status.
+            </summary>
+            <returns><c>true</c>, if entity is active, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Entity.setActive(System.Boolean)">
+            <summary>
+            Sets entity active status.
+            </summary>
+            <param name="active">new active status</param>
+        </member>
+        <member name="M:pacman.Entity.notCollidable">
+            <summary>
+            Gets entity's collidable status.
+            </summary>
+            <returns><c>false</c>, if entity is collidable, <c>true</c> otherwise</returns>
+        </member>
+        <member name="T:pacman.Moving">
+            <summary>
+            <c>Moving</c> is an abstract class for all different types
+            of moving entities in the game.
+            </summary>
+        </member>
+        <member name="M:pacman.Moving.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of abstract moving class always called
+            by all moving entities present in game.It takes the
+            game handler for having access to the game map and
+            its elements, an x-coordinate and a y-coordinate,
+            which are both absolute in pixels, rather than in map tiles.
+            
+            It also sets local variables, such as alive status, speed,
+            x and y-coordinates in map tiles and the bounding rectangle.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.Moving.move">
+            <summary>
+            General moving method for all moving entities
+            in the game.It has two different implementations,
+            the PacMan's and the enemies'.
+            </summary>
+        </member>
+        <member name="M:pacman.Moving.moveX">
+            <summary>
+            Sets the x-coordinate for moved entity.
+            It makes no changes, when <c>xMove</c>
+            is 0.
+            </summary>
+        </member>
+        <member name="M:pacman.Moving.moveY">
+            <summary>
+            Sets the y-coordinate for moved entity.
+            It makes no changes, when <c>yMove</c>
+            is 0.
+            </summary>
+        </member>
+        <member name="M:pacman.Moving.moveRight">
+            <summary>
+            Moves the entity to the right if it is possible
+            and sets orientation to <c>RIGHT</c>.
+            When it is not possible to move right, it makes
+            no changes.
+            </summary>
+        </member>
+        <member name="M:pacman.Moving.moveLeft">
+            <summary>
+            Moves the entity to the left if it is possible
+            and sets orientation to <c>LEFT</c>.
+            When it is not possible to move left, it makes
+            no changes.
+            </summary>
+        </member>
+        <member name="M:pacman.Moving.moveUp">
+            <summary>
+            Moves the entity up if it is possible
+            and sets orientation to <c>UP</c>.
+            When it is not possible to move up, it makes
+            no changes.
+            </summary>
+        </member>
+        <member name="M:pacman.Moving.moveDown">
+            <summary>
+            Moves the entity down if it is possible
+            and sets orientation to <c>DOWN</c>.
+            When it is not possible to move down, it makes
+            no changes.
+            </summary>
+        </member>
+        <member name="M:pacman.Moving.canGoRight(System.Int32)">
+            <summary>
+            Checks the upper and lower right corner of
+            the entity for collisions with walls.
+            </summary>
+            <param name="tx">x-coordinate of target tile</param>
+            <returns><c>true</c>, if there is no collision, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Moving.canGoLeft(System.Int32)">
+            <summary>
+            Checks the upper and lower left corner of
+            the entity for collisions with walls.
+            </summary>
+            <param name="tx">x-coordinate of target tile</param>
+            <returns><c>true</c>, if there is no collision, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Moving.canGoUp(System.Int32)">
+            <summary>
+            Checks the left and right upper corner of
+            the entity for collisions with walls.
+            </summary>
+            <param name="ty">y-coordinate of target tile</param>
+            <returns><c>true</c>, if there is no collision, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Moving.canGoDown(System.Int32)">
+            <summary>
+            Checks the left and right lower corner of
+            the entity for collisions with walls.
+            </summary>
+            <param name="ty">y-coordinate of target tile</param>
+            <returns><c>true</c>, if there is no collision, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Moving.noCollisionWithTile(System.Int32,System.Int32)">
+            <summary>
+            Checks if tile on position <c>(x, y)</c>
+            is free.
+            </summary>
+            <param name="x">x-coordinate of examined tile</param>
+            <param name="y">y-coordinate of examined tile</param>
+            <returns><c>true</c>, if tile is not a wall, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Moving.notAlive">
+            <summary>
+            Gets alive status of entity.
+            </summary>
+            <returns><c>false</c>, if entity is alive, <c>true</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Moving.setAlive(System.Boolean)">
+            <summary>
+            Sets alive status of entity.
+            </summary>
+            <param name="alive">new alive status of entity</param>
+        </member>
+        <member name="M:pacman.Moving.getxSpawn">
+            <summary>
+            Gets x-coordinate of entity's spawn point.
+            </summary>
+            <returns>x-coordinate of entity's spawn point</returns>
+        </member>
+        <member name="M:pacman.Moving.setxSpawn(System.Single)">
+            <summary>
+            Sets x-coordinate of entity's spawn point.
+            </summary>
+            <param name="xSpawn">new x-coordinate of entity's spawn point</param>
+        </member>
+        <member name="M:pacman.Moving.getySpawn">
+            <summary>
+            Gets y-coordinate of entity's spawn point.
+            </summary>
+            <returns>y-coordinate of entity's spawn point</returns>
+        </member>
+        <member name="M:pacman.Moving.setySpawn(System.Single)">
+            <summary>
+            Sets y-coordinate of entity's spawn point.
+            </summary>
+            <param name="ySpawn">new y-coordinate of entity's spawn point</param>
+        </member>
+        <member name="M:pacman.Moving.getOrientation">
+            <summary>
+            Gets entity's orientation.
+            </summary>
+            <returns>entity's orientation</returns>
+        </member>
+        <member name="M:pacman.Moving.setOrientation(pacman.Orientation)">
+            <summary>
+            Sets entity orientation.
+            </summary>
+            <param name="orientation">new entity orientation</param>
+        </member>
+        <member name="T:pacman.PacMan">
+            <summary>
+            PacMan class controls PacMan's movements and rendering.
+            It has specific movement behaviour, because its
+            dependent on user keyboard input.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:pacman.PacMan.#ctor(pacman.Handler,System.Single,System.Single)" -->
+        <member name="M:pacman.PacMan.move">
+            <summary>
+            PacMan's implementation of general move method
+            which is abstract in <c>Moving</c> class.
+            Checks for collisions and handles their
+            consequences, if there are any.
+            </summary>
+        </member>
+        <member name="M:pacman.PacMan.moveX">
+            <summary>
+            Handles PacMan's movement on the x axis.
+            It is dependent on PacMan's current orientation,
+            current alignment with the tile grid and user input.
+            It makes no changes, when <c>xMove</c> is 0.
+            </summary>
+        </member>
+        <member name="M:pacman.PacMan.moveY">
+            <summary>
+            Handles PacMan's movement on the y axis.
+            It is dependent on PacMan's current orientation,
+            current alignment with the tile grid and user input.
+            It makes no changes, when <c>yMove</c> is 0.
+            </summary>
+        </member>
+        <member name="M:pacman.PacMan.handleCollision(pacman.Enemy)">
+            <summary>
+            Handles PacMan's collision with a ghost.
+            In accordance to current game situation, it sets
+            corresponding action.
+            </summary>
+            <param name="e">enemy colliding with PacMan</param>
+        </member>
+        <member name="M:pacman.PacMan.tick">
+            <summary>
+            Calculates next animation image and next move of PacMan.
+            Next move is only calculated, if the game is running
+            and PacMan is not in process of losing a life.
+            </summary>
+        </member>
+        <member name="M:pacman.PacMan.getInput">
+            <summary>
+            According to user input, it sets the
+            <c>xMove</c> and <c>yMove</c>
+            variables to desired values.
+            </summary>
+        </member>
+        <member name="M:pacman.PacMan.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws current animation of PacMan.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="M:pacman.PacMan.getCurrentAnimationType">
+            <summary>
+            Gets current animation type for PacMan rendering.
+            </summary>
+            <returns>current animation to render</returns>
+        </member>
+        <member name="T:pacman.Enemy">
+            <summary>
+            <c>Enemy</c> is an abstract class for all different types
+            of ghosts present in the game.
+            <para>Each type of ghost has different behaviour regarding
+            his movements in chase and scatter modes. All share the
+            same behaviour, when in blue-ghosts mode or dead mode.</para>
+            </summary>
+        </member>
+        <member name="M:pacman.Enemy.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of abstract enemy class always called
+            by all ghosts present in game.It takes the game handler
+            for having access to the game map and its elements,
+            an x-coordinate and a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles.
+            
+            It also sets local variables, such as random number
+            generator, x and y-coordinates in map tiles and
+            the bounding rectangle.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.Enemy.move">
+            <summary>
+            Enemies' implementation of general move method
+            which is abstract in <c>Moving</c> class.
+            Checks for collision with PacMan and handles its
+            consequences, if there are any.
+            </summary>
+        </member>
+        <member name="M:pacman.Enemy.moveX">
+            <inheritdoc/>
+        </member>
+        <member name="M:pacman.Enemy.moveY">
+            <inheritdoc/>
+        </member>
+        <member name="M:pacman.Enemy.handleCollision">
+            <summary>
+            Handles enemies' collision with PacMan.
+            In accordance to current game situation, it sets
+            corresponding action.
+            </summary>
+        </member>
+        <member name="M:pacman.Enemy.moveChase">
+            <summary>
+            Basic action when moving in chase mode.
+            It sets the enemy's coordinates to new ones.
+            </summary>
+        </member>
+        <member name="M:pacman.Enemy.moveScatter">
+            <summary>
+            Basic action when moving in scatter mode.
+            It sets the enemy's coordinates to new ones.
+            </summary>
+        </member>
+        <member name="M:pacman.Enemy.moveBlue">
+            <summary>
+            Handles movement of enemies, when they can be eaten
+            by PacMan.
+            <para>When PacMan eats a killer food, the enemies turn blue
+            and can be temporarily eaten by PacMan. In this state,
+            they choose their destination tile randomly on every
+            crossroads.</para>
+            </summary>
+        </member>
+        <member name="M:pacman.Enemy.moveDead">
+            <summary>
+            Handles movement of enemies, when they are not alive.
+            <para>When PacMan eats an enemy, the enemy has to return
+            to its spawn coordinates before it is resurrected.
+            If it comes to its spawn coordinates too quickly, it
+            has to wait some time (the overall time of being dead
+            cannot be less than 2 seconds).</para>
+            <para>If enemy is already present at its spawn coordinates,
+            it is resurrected, if the minimum dead time has
+            passed.Otherwise, the target tile is the enemy's
+            spawn tile.</para>
+            </summary>
+        </member>
+        <member name="M:pacman.Enemy.moveEating">
+            <summary>
+            Moves the enemy, which is eating PacMan.
+            If this enemy is the one that caught PacMan and is eating him,
+            it is moved to PacMan's coordinates in 5 steps, creating
+            an animation of eating PacMan.
+            </summary>
+        </member>
+        <member name="M:pacman.Enemy.findFree">
+            <summary>
+            Finds free neighbour tiles to go to.
+            This method is only called when enemy is aligned
+            with the tile grid.It also ensures, that the enemy
+            won't turn around unless it is necessary (it is the
+            only possible move).
+            </summary>
+        </member>
+        <member name="M:pacman.Enemy.setMovement(System.Int32,System.Int32)">
+            <summary>
+            Chooses a free neighbour tile which is the closest
+            to the target tile and sets enemy's movement in that
+            direction.
+            </summary>
+            <param name="targetX">x-coordinate of target tile</param>
+            <param name="targetY">y-coordinate of target tile</param>
+        </member>
+        <member name="M:pacman.Enemy.flipOrientation">
+            <summary>
+            Immediately flips the enemy's orientation.
+            This method is called whenever there is a change
+            in enemies' movement mode, for example from chase
+            to scatter or from blue ghosts to chase.
+            </summary>
+        </member>
+        <member name="M:pacman.Enemy.Distance(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets euclidean distance between two tiles.
+            </summary>
+            <param name="x1">x-coordinate of first tile</param>
+            <param name="y1">y-coordinate of first tile</param>
+            <param name="x2">x-coordinate of second tile</param>
+            <param name="y2">y-coordinate of second tile</param>
+            <returns>euclidean distance between the two tiles</returns>
+        </member>
+        <member name="M:pacman.Enemy.tick">
+            <summary>
+            Chooses which calculation of next enemy move should be done
+            and calls it.
+            </summary>
+        </member>
+        <member name="M:pacman.Enemy.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws enemy if it is dead or if the game is in blue-ghosts mode.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="M:pacman.Enemy.setAlive(System.Boolean)">
+            <summary>
+            Sets alive status of enemy and adjusts local variables
+            according to new alive status.
+            </summary>
+            <param name="alive">new alive status of enemy</param>
+        </member>
+        <member name="M:pacman.Enemy.notImmuneToBlue">
+            <summary>
+            Gets immunity status of enemy.
+            </summary>
+            <returns><c>false</c>, if enemy is immune, <c>true</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Enemy.setImmuneToBlue(System.Boolean)">
+            <summary>
+            Gets immunity status of enemy.
+            </summary>
+            <param name="immuneToBlue"><c>false</c>, if enemy is immune, <c>true</c> otherwise</param>
+        </member>
+        <member name="T:pacman.EnemyPink">
+            <summary>
+            <c>EnemyPink</c> class controls movements and rendering
+            of the pink enemy.
+            </summary>
+        </member>
+        <member name="M:pacman.EnemyPink.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of <c>EnemyPink</c> class only calls constructor
+            of the abstract <c>Enemy</c> class. It takes the game handler
+            for having access to the game map and its elements,
+            an x-coordinate and a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.EnemyPink.moveChase">
+             <summary>
+              Pink enemy's implementation of chase mode movement.
+            
+             <para>In the chase mode, the pink enemy's target tile is
+             PacMan's current position.</para>
+             </summary>
+        </member>
+        <member name="M:pacman.EnemyPink.moveScatter">
+            <summary>
+            Pink enemy's implementation of scatter mode movement.
+            <para>In the scatter mode, the pink enemy's target tile is
+            located outside the maze in the upper left corner,
+            resulting in it circulating around obstacles as near
+            that corner as possible.</para>
+            </summary>
+        </member>
+        <member name="M:pacman.EnemyPink.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws pink enemy's image if it wasn't rendered by
+            super method.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="T:pacman.EnemyPurple">
+            <summary>
+            <c>EnemyPurple</c> class controls movements and rendering
+            of the purple enemy.
+            </summary>
+        </member>
+        <member name="M:pacman.EnemyPurple.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of <c>EnemyPurple</c> class only calls constructor
+            of the abstract <c>Enemy</c> class. It takes the game handler
+            for having access to the game map and its elements,
+            an x-coordinate and a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.EnemyPurple.moveChase">
+            <summary>
+            Purple enemy's implementation of chase mode movement.
+            <para>In the chase mode, the purple enemy's target tile is
+            4 tiles in front of PacMan, but if the purple enemy's
+            euclidean distance from PacMan is less than 6, its
+            target tile is located outside the maze in the lower
+            right corner, resulting in it circulating around
+            obstacles as near that corner as possible.</para>
+            </summary>
+        </member>
+        <member name="M:pacman.EnemyPurple.moveScatter">
+            <summary>
+            Purple enemy's implementation of scatter mode movement.
+            <para>In the scatter mode, the purple enemy's target tile is
+            located outside the maze in the lower right corner,
+            resulting in it circulating around obstacles as near
+            that corner as possible.</para>
+            </summary>
+        </member>
+        <member name="M:pacman.EnemyPurple.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draw purple enemy's image if it wasn't rendered by
+            super method.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="T:pacman.EnemyRed">
+            <summary>
+            <c>EnemyRed</c> class controls movements and rendering
+            of the red enemy.
+            </summary>
+        </member>
+        <member name="M:pacman.EnemyRed.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of <c>EnemyRed</c> class only calls constructor
+            of the abstract <c>Enemy</c> class. It takes the game handler
+            for having access to the game map and its elements,
+            an x-coordinate and a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.EnemyRed.moveChase">
+            <summary>
+            Red enemy's implementation of chase mode movement.
+            <para>In the chase mode, the red enemy's target tile is
+            calculated from positions of PacMan and the pink enemy.
+            It computes a vector from PacMan to the pink enemy,
+            subtracts it from PacMan's position and that is its
+            target tile.</para>
+            <para><b>Example:</b>
+            PacMan's position is (3, 3), the pink enemy's position
+            is (5, 7). The vector from PacMan to the pink enemy is
+            (2, 4), the target tile is (3, 3) - (2, 4) = (1, -1).</para>
+            </summary>
+        </member>
+        <member name="M:pacman.EnemyRed.moveScatter">
+            <summary>
+            Red enemy's implementation of scatter mode movement.
+            <para>In the scatter mode, the red enemy's target tile is
+            located outside the maze in the upper right corner,
+            resulting in it circulating around obstacles as near
+            that corner as possible.</para>
+            </summary>
+        </member>
+        <member name="M:pacman.EnemyRed.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draw red enemy's image if it wasn't rendered by
+            super method.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="T:pacman.EnemyYellow">
+            <summary>
+            <c>EnemyYellow</c> class controls movements and rendering
+            of the yellow enemy.
+            </summary>
+        </member>
+        <member name="M:pacman.EnemyYellow.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of <c>EnemyYellow</c> class only calls constructor
+            of the abstract <c>Enemy</c> class. It takes the game handler
+            for having access to the game map and its elements,
+            an x-coordinate and a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.EnemyYellow.moveChase">
+            <summary>
+            Yellow enemy's implementation of chase mode movement. 
+            <para>In the chase mode, the yellow enemy's target tile is
+            completely random on every crossroads, resulting in
+            its chaotic movement in the maze.</para>
+            </summary>
+        </member>
+        <member name="M:pacman.EnemyYellow.moveScatter">
+            <summary>
+            Yellow enemy's implementation of scatter mode movement.
+            <para>In the scatter mode, the yellow enemy's target tile is
+            located outside the maze in the lower left corner,
+            resulting in it circulating around obstacles as near
+            that corner as possible.</para>
+            </summary>
+        </member>
+        <member name="M:pacman.EnemyYellow.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draw yellow enemy's image if it wasn't rendered by
+            super method.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="T:pacman.Food">
+            <summary>
+            <c>Food</c> is an abstract class for all different types
+            of food in the game.
+            </summary>
+        </member>
+        <member name="M:pacman.Food.#ctor(pacman.Handler,System.Single,System.Single,System.Int32)">
+            <summary>
+            Constructor of abstract food class always called
+            by all food present in game.It takes the game handler
+            for having access to the game map and its elements,
+            an x-coordinate, a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles, and
+            a score value of the food.
+            It also sets local variables, and the bounding
+            rectangle.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+            <param name="score">score value of the food</param>
+        </member>
+        <member name="M:pacman.Food.setActive(System.Boolean)">
+            <summary>
+            Sets active status of the food.
+            If the food becomes inactive (it is
+            eaten by PacMan), its score is
+            added to player's score.
+            </summary>
+            <param name="active">new active status</param>
+        </member>
+        <member name="T:pacman.FoodBanana">
+            <summary>
+            <c>FoodBanana</c> class controls rendering of the
+            banana food.
+            </summary>
+        </member>
+        <member name="M:pacman.FoodBanana.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of <c>FoodBanana</c> class only calls
+            constructor of the abstract <c>Food</c> class with score
+            set to 200. It takes the game handler for having
+            access to the game map and its elements,
+            an x-coordinate and a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles.
+            It also sets local variables, and the bounding
+            rectangle.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.FoodBanana.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws banana food's image.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="T:pacman.FoodCherry">
+            <summary>
+            <c>FoodCherry</c> class controls rendering of the
+            banana food.
+            </summary>
+        </member>
+        <member name="M:pacman.FoodCherry.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of <c>FoodCherry</c> class only calls
+            constructor of the abstract <c>Food</c> class with score
+            set to 100. It takes the game handler for having
+            access to the game map and its elements,
+            an x-coordinate and a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles.
+            It also sets local variables, and the bounding
+            rectangle.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.FoodCherry.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws cherry food's image.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="T:pacman.FoodStrawberry">
+            <summary>
+            <c>FoodStrawberry</c> class controls rendering of the
+            banana food.
+            </summary>
+        </member>
+        <member name="M:pacman.FoodStrawberry.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of <c>FoodStrawberry</c> class only calls
+            constructor of the abstract <c>Food</c> class with score
+            set to 150. It takes the game handler for having
+            access to the game map and its elements,
+            an x-coordinate and a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles.
+            It also sets local variables, and the bounding
+            rectangle.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.FoodStrawberry.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws strawberry food's image.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="T:pacman.FoodKiller">
+            <summary>
+            <c>FoodKiller</c> class controls rendering of the
+            killer food.
+            </summary>
+        </member>
+        <member name="M:pacman.FoodKiller.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of <c>FoodKiller</c> class only calls
+            constructor of the abstract <c>Food</c> class with score
+            set to 0. It takes the game handler for having
+            access to the game map and its elements,
+            an x-coordinate and a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles.
+            It also sets local variables, and the bounding
+            rectangle.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.FoodKiller.setActive(System.Boolean)">
+            <summary>
+            Sets active status of the food.
+            If the killer food becomes inactive
+            (it is eaten by PacMan), the enemies
+            turn blue and can be temporarily eaten
+            by PacMan.
+            </summary>
+            <param name="active">new active status</param>
+        </member>
+        <member name="M:pacman.FoodKiller.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws killer food's image.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="T:pacman.FoodNormal">
+            <summary>
+            <c>FoodNormal</c> class controls rendering of the
+            normal food.
+            </summary>
+        </member>
+        <member name="M:pacman.FoodNormal.#ctor(pacman.Handler,System.Single,System.Single)">
+            <summary>
+            Constructor of <c>FoodNormal</c> class only calls
+            constructor of the abstract <c>Food</c> class with score
+            set to 1. It takes the game handler for having
+            access to the game map and its elements,
+            an x-coordinate and a y-coordinate, which are both
+            absolute in pixels, rather than in map tiles.
+            It also sets local variables, and the bounding
+            rectangle.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="x">absolute x-coordinate in pixels</param>
+            <param name="y">absolute y-coordinate in pixels</param>
+        </member>
+        <member name="M:pacman.FoodNormal.setActive(System.Boolean)">
+            <summary>
+            Sets active status of the food.
+            If the food becomes inactive (it is
+            eaten by PacMan), its score is
+            added to player's score. If this was
+            the last remaining normal food in
+            the maze, level up.
+            </summary>
+            <param name="active">new active status</param>
+        </member>
+        <member name="M:pacman.FoodNormal.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws normal food's image.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="T:pacman.OrientationExtensions">
+            <summary>
+            The <c>Orientation</c> class holds data for storing
+            information about moving entities' orientation.
+            It contains two static method to transfer the
+            enum's values to and from integer value respectively.
+            </summary>
+        </member>
+        <member name="M:pacman.OrientationExtensions.fromInt(pacman.Orientation,System.Int32)">
+            <summary>
+            Gets <c>orientation</c> value from given integer value.
+            </summary>
+            <param name="n">integer value of the <c>orientation</c></param>
+            <returns><c>orientation</c> value from given integer value</returns>
+        </member>
+        <member name="M:pacman.OrientationExtensions.toInt(pacman.Orientation,pacman.Orientation)">
+            <summary>
+            Gets integer value of given <c>orientation</c> value.
+            </summary>
+            <param name="o"><c>orientation</c> value</param>
+            <returns>integer value of given <c>orientation</c> value</returns>
+        </member>
+        <member name="T:pacman.Assets">
+            <summary>
+            The <c>Assets</c> class holds all image and font data for the game.
+            Every image or font displayed on the screen at one point in time
+            or another is called from this class.
+            All its methods and fields are static.
+            </summary>
+        </member>
+        <member name="M:pacman.Assets.Initialize">
+            <summary>
+            Loads all images to be displayed in game from resource files.
+            </summary>
+        </member>
+        <member name="T:pacman.SpriteSheet">
+            <summary>
+            The <code>SpriteSheet</code> inner class provides methods for slicing
+            an image.
+            It is used to take parts from large sprite sheets and return
+            those parts as individual images.
+            </summary>
+        </member>
+        <member name="M:pacman.SpriteSheet.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Constructor of the <c>SpriteSheet</c> inner class. It takes
+            the sprite sheet to be sliced as parameter.
+            </summary>
+            <param name="sheet">an image containing the sprite sheet
+                                to be sliced</param>
+        </member>
+        <member name="M:pacman.SpriteSheet.crop(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns an image sliced from this inner class'
+            sheet image.
+            </summary>
+            <param name="x">x-coordinate of upper left corner of
+                            the sliced part</param>
+            <param name="y">y-coordinate of upper left corner of
+                            the sliced part</param>
+            <param name="width">width of the sliced part</param>
+            <param name="height">height of the sliced part</param>
+            <returns>an image sliced from this class' sheet image</returns>
+        </member>
+        <member name="T:pacman.Animation">
+            <summary>
+            The <c>Animation</c> class holds all necessary data
+            for images that should be rendered with some
+            animations.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:pacman.Animation.#ctor(System.Int32,Microsoft.Xna.Framework.Graphics.Texture2D[])" -->
+        <member name="M:pacman.Animation.tick">
+            <summary>
+            Decides, whether it is time to change the indexing
+            variable of the animation array.
+            That means, that if more time than desired for
+            animation <c>speed</c> has passed, the next frame will be
+            indexed in <c>getCurrentType</c> method.
+            </summary>
+        </member>
+        <member name="M:pacman.Animation.getCurrentType">
+            <summary>
+            Gets current animation frame from animation array.
+            The indexing variable is set in the <c>tick</c>
+            method.
+            </summary>
+            <returns>current animation frame</returns>
+        </member>
+        <member name="T:pacman.Handler">
+            <summary>
+            The <c>Handler</c> class enables different
+            game objects and entities to access each other
+            when necessary.
+            </summary>
+        </member>
+        <member name="M:pacman.Handler.#ctor(pacman.MyGame)">
+            <summary>
+            Constructor of the <c>Handler</c> class.
+            It takes the game itself as a parameter.
+            </summary>
+            <param name="game">the game</param>
+        </member>
+        <member name="M:pacman.Handler.resetGame">
+            <summary>
+            Resets game to its initial state.
+            </summary>
+        </member>
+        <member name="M:pacman.Handler.getWidth">
+            <summary>
+            Gets the game pixel width
+            </summary>
+            <returns>the game width in pixels</returns>
+        </member>
+        <member name="M:pacman.Handler.getHeight">
+            <summary>
+            Gets the game pixel height
+            </summary>
+            <returns>the game height in pixels</returns>
+        </member>
+        <member name="M:pacman.Handler.getKeyManager">
+            <summary>
+            Gets the game's key manager.
+            </summary>
+            <returns>key manager of the game</returns>
+        </member>
+        <member name="M:pacman.Handler.getMouseManager">
+            <summary>
+            Gets the game's mouse manager.
+            </summary>
+            <returns>mouse manager of the game</returns>
+        </member>
+        <member name="M:pacman.Handler.getGame">
+            <summary>
+            Gets the game.
+            </summary>
+            <returns>the game</returns>
+        </member>
+        <member name="M:pacman.Handler.getMap">
+            <summary>
+            Gets the game map.
+            </summary>
+            <returns>the game map</returns>
+        </member>
+        <member name="M:pacman.Handler.setMap(pacman.Map)">
+            <summary>
+            Sets the game map.
+            </summary>
+            <param name="map">new game map</param>
+        </member>
+        <member name="T:pacman.LevelLoader">
+            <summary>
+            The <c>LevelLoader</c> class controls loading of the level map
+            from resource map file. It contains static methods only.
+            </summary>
+        </member>
+        <member name="M:pacman.LevelLoader.loadMapToString(System.String)">
+            <summary>
+            Loads the level map from resource file to a single string.
+            </summary>
+            <param name="path">path to resource map file</param>
+            <returns>single string containing the loaded map</returns>
+        </member>
+        <member name="M:pacman.LevelLoader.charToInt(System.Char)">
+            <summary>
+            Converts a character to a corresponding integer value
+            used in the game.
+            </summary>
+            <param name="c">a character</param>
+            <returns>corresponding integer value</returns>
+        </member>
+        <member name="M:pacman.LevelLoader.parseInt(System.String)">
+            <summary>
+            Gets an integer value from a string containing a number.
+            If the string cannot be converted to a number (it contains
+            other characters than numbers and unary minus) it returns
+            <c>-1</c>.
+            </summary>
+            <param name="number">a string containing a number</param>
+            <returns>integer value of the string</returns>
+        </member>
+        <member name="T:pacman.Map">
+            <summary>
+            The <c>Map</c> class is the class responsible for
+            controlling all the game characters by calling their
+            <c>tick</c> and <c>render</c> methods.
+            </summary>
+        </member>
+        <member name="M:pacman.Map.#ctor(pacman.Handler,System.Int32)">
+            <summary>
+            Constructor of the <c>Map</c> class. It takes the game handler,
+            for having access to all elements of the game, and level number as
+            parameters.
+            It calls the<c>loadMap</c> method to load the game map of
+            the correct level.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="level">current game level (map to be loaded)</param>
+        </member>
+        <member name="M:pacman.Map.loadMap(System.Int32)">
+            <summary>
+            Loads the level map from resource map file and initializes
+            all necessary local variables accordingly.
+            </summary>
+            <param name="level">current game level</param>
+        </member>
+        <member name="M:pacman.Map.restartAfterPacManDeath">
+            <summary>
+            Restarts the moving entities positions after PacMan loses a life.
+            It also clears the keyboard input data.
+            </summary>
+        </member>
+        <member name="M:pacman.Map.tick">
+            <summary>
+            Decides what actions to make based on current game situation.
+            </summary>
+        </member>
+        <member name="M:pacman.Map.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Goes over the map tile by tile and renders them on the screen,
+            the does the same with all entities.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="M:pacman.Map.getTile(System.Int32,System.Int32)">
+            <summary>
+            Gets tile on given coordinates.
+            </summary>
+            <param name="x">x-coordinate of the tile</param>
+            <param name="y">y-coordinate of the tile</param>
+            <returns>tile on given coordinates</returns>
+        </member>
+        <member name="M:pacman.Map.getWidth">
+            <summary>
+            Gets map width in tiles.
+            </summary>
+            <returns>map width in tiles</returns>
+        </member>
+        <member name="M:pacman.Map.setWidth(System.Int32)">
+            <summary>
+            Sets map width in tiles.
+            </summary>
+            <param name="width">new map width in tiles</param>
+        </member>
+        <member name="M:pacman.Map.getHeight">
+            <summary>
+            Gets map height in tiles.
+            </summary>
+            <returns>map height in tiles</returns>
+        </member>
+        <member name="M:pacman.Map.setHeight(System.Int32)">
+            <summary>
+            Sets map height in tiles.
+            </summary>
+            <param name="height">new map height in tiles</param>
+        </member>
+        <member name="M:pacman.Map.getEntityManager">
+            <summary>
+            Gets the map's entity manager.
+            </summary>
+            <returns>the map's entity manager</returns>
+        </member>
+        <member name="M:pacman.Map.isBlueGhosts">
+            <summary>
+            Gets blue ghosts status.
+            </summary>
+            <returns><c>true</c>, if blue ghosts mode is active, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Map.setBlueGhosts(System.Boolean)">
+            <summary>
+            Sets blue ghosts status.
+            </summary>
+            <param name="blueGhosts">new blue ghosts status</param>
+        </member>
+        <member name="M:pacman.Map.isChase">
+            <summary>
+            Gets chase status.
+            </summary>
+            <returns><c>true</c>, if chase mode is active, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Map.setChase(System.Boolean)">
+            <summary>
+            Sets chase status.
+            </summary>
+            <param name="chase">new chase status</param>
+        </member>
+        <member name="M:pacman.Map.isScatter">
+            <summary>
+            Gets scatter status.
+            </summary>
+            <returns><c>true</c>, if scatter mode is active, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Map.setScatter(System.Boolean)">
+            <summary>
+            Sets scatter status.
+            </summary>
+            <param name="scatter">new scatter status</param>
+        </member>
+        <member name="M:pacman.Map.isEatingPacMan">
+            <summary>
+            Gets eating PacMan status.
+            </summary>
+            <returns><c>true</c>, if eating PacMan mode is active, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Map.setEatingPacMan(System.Boolean,pacman.Enemy)">
+            <summary>
+            Sets eating PacMan status.
+            </summary>
+            <param name="eatingPacMan">new eating PacMan status</param>
+            <param name="e">the enemy eating PacMan</param>
+        </member>
+        <member name="M:pacman.Map.notLevelBegin">
+            <summary>
+            Gets level begin status.
+            </summary>
+            <returns><c>true</c>, if level begin mode is active, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Map.setLevelBegin(System.Boolean)">
+            <summary>
+            Sets level begin status.
+            </summary>
+            <param name="levelBegin">new level begin status</param>
+        </member>
+        <member name="M:pacman.Map.setLastTime(System.Int64)">
+            <summary>
+            Sets last time.
+            </summary>
+            <param name="lastTime">new value of last time</param>
+        </member>
+        <member name="M:pacman.Map.getFoodCount">
+            <summary>
+            Gets current food count.
+            </summary>
+            <returns>current food count</returns>
+        </member>
+        <member name="M:pacman.Map.setFoodCount(System.Int32)">
+            <summary>
+            Sets current food count.
+            </summary>
+            <param name="foodCount">new food count</param>
+        </member>
+        <member name="T:pacman.MyGame">
+            <summary>
+            The <c>PacMan</c> class is the main class of
+            the HungryPacMan game responsible for running
+            the game loop(<c>update</c> and <c>draw</c>).
+            </summary>
+        </member>
+        <member name="M:pacman.MyGame.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+            Constructor of the main <c>PacMan</c> class.
+            It takes the game's title, its width and height as
+            parameters. It also initializes the local variables,
+            such as <c>score</c>, <c>lives</c>, etc.
+            </summary>
+            <param name="title">the game title</param>
+            <param name="width">the game width</param>
+            <param name="height">the game height</param>
+        </member>
+        <member name="M:pacman.MyGame.Initialize">
+            <summary>
+            Initializes the game at first start.
+            </summary>
+        </member>
+        <member name="M:pacman.MyGame.LoadContent">
+            <summary>
+            Loads all graphical and text content.
+            </summary>
+        </member>
+        <member name="M:pacman.MyGame.UnloadContent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:pacman.MyGame.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="M:pacman.MyGame.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="M:pacman.MyGame.resetGame">
+            <summary>
+            Resets game data to initial ones.
+            </summary>
+        </member>
+        <member name="M:pacman.MyGame.getKeyManager">
+            <summary>
+            Gets the key manager.
+            </summary>
+            <returns>the key manager</returns>
+        </member>
+        <member name="M:pacman.MyGame.getMouseManager">
+            <summary>
+            Gets the mouse manager.
+            </summary>
+            <returns>the mouse manager</returns>
+        </member>
+        <member name="M:pacman.MyGame.getWidth">
+            <summary>
+            Gets the game width.
+            </summary>
+            <returns>the game width</returns>
+        </member>
+        <member name="M:pacman.MyGame.getHeight">
+            <summary>
+            Gets the game height.
+            </summary>
+            <returns>the game height</returns>
+        </member>
+        <member name="M:pacman.MyGame.getScore">
+            <summary>
+            Gets current score.
+            </summary>
+            <returns>current score</returns>
+        </member>
+        <member name="M:pacman.MyGame.setScore(System.Int32)">
+            <summary>
+            Sets the score.
+            </summary>
+            <param name="score">new score</param>
+        </member>
+        <member name="M:pacman.MyGame.getHighScore">
+            <summary>
+            Gets the current high score.
+            </summary>
+            <returns>current high score</returns>
+        </member>
+        <member name="M:pacman.MyGame.getLives">
+            <summary>
+            Gets current lives count.
+            </summary>
+            <returns>current lives count</returns>
+        </member>
+        <member name="M:pacman.MyGame.setLives(System.Int32)">
+            <summary>
+            Sets current lives count.
+            </summary>
+            <param name="lives">new life count</param>
+        </member>
+        <member name="M:pacman.MyGame.getGameState">
+            <summary>
+            Gets the <c>GameState</c>.
+            </summary>
+            <returns>the <c>GameState</c></returns>
+        </member>
+        <member name="T:pacman.GameLauncher">
+            <summary>
+            The main class.
+            </summary>
+        </member>
+        <member name="M:pacman.GameLauncher.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:pacman.State">
+            <summary>
+            <c>State</c> is an abstract class for all different types
+            of game states the game can be in.
+            <para>Each type of state has different appearance as well as different
+            user interaction options. This class also contains the static
+            methods <c>getState</c> and <c>setState</c> which are
+            responsible for changing of the current state.</para>
+            </summary>
+        </member>
+        <member name="M:pacman.State.#ctor(pacman.Handler)">
+            <summary>
+            Constructor of the abstract state class. It takes
+            the game handler, for having access to all elements
+            of the game as a parameter.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+        </member>
+        <member name="M:pacman.State.getState">
+            <summary>
+            Gets current state.
+            </summary>
+            <returns>current state</returns>
+        </member>
+        <member name="M:pacman.State.setState(pacman.State)">
+            <summary>
+            Sets current state.
+            </summary>
+            <param name="state">new current state</param>
+        </member>
+        <member name="M:pacman.State.tick">
+            <summary>
+            Updates all user interface elements.
+            </summary>
+        </member>
+        <member name="M:pacman.State.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws all user interface elements.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="M:pacman.State.getManager">
+            <summary>
+            Gets user interface manager.
+            </summary>
+            <returns>user interface manager</returns>
+        </member>
+        <member name="T:pacman.GameState">
+            <summary>
+            The <c>GameState</c> class is responsible
+            for creating and rendering the Games state, as well
+            as for some parts of the game itself.
+            It holds the current level of the game and the game map.
+            </summary>
+        </member>
+        <member name="M:pacman.GameState.#ctor(pacman.Handler)">
+            <summary>
+            Constructor of the <c>GameState</c> class.
+            It calls the base constructor and then calls the
+            <c>createGameState</c> method to initialize
+            the appearance of the state.It also initializes
+            local variables, such as level, animation and map.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+        </member>
+        <member name="M:pacman.GameState.createGameState">
+            <summary>
+            Creates all user interface elements of the state.
+            </summary>
+        </member>
+        <member name="M:pacman.GameState.levelUp">
+            <summary>
+            Performs level up actions.
+            Depending on level number, it loads the new
+            level's map, or switches the game to Win state.
+            </summary>
+        </member>
+        <member name="M:pacman.GameState.tick">
+            <summary>
+            Updates level, score and high score count,
+            all other user interface elements and the map.
+            </summary>
+        </member>
+        <member name="M:pacman.GameState.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws all user interface elements, the map and lives count.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="M:pacman.GameState.getMap">
+            <summary>
+            Gets the map.
+            </summary>
+            <returns>the map</returns>
+        </member>
+        <member name="T:pacman.AboutState">
+            <summary>
+            The <c>AboutState</c> class is responsible
+            for creating and rendering the About state.
+            </summary>
+        </member>
+        <member name="M:pacman.AboutState.#ctor(pacman.Handler)">
+            <summary>
+            Constructor of the <c>AboutState</c> class.
+            It calls the base constructor and then calls the
+            <c>createAboutState</c> method to initialize
+            the appearance of the state.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+        </member>
+        <member name="M:pacman.AboutState.createAboutState">
+            <summary>
+            Creates all user interface elements of the state.
+            </summary>
+        </member>
+        <member name="T:pacman.MenuState">
+            <summary>
+            The <c>MenuState</c> class is responsible
+            for creating and rendering the Menu state.
+            </summary>
+        </member>
+        <member name="M:pacman.MenuState.#ctor(pacman.Handler)">
+            <summary>
+            Constructor of the <c>MenuState</c> class.
+            It calls the base constructor and then calls the
+            <c>createMenuState</c> method to initialize
+            the appearance of the state.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+        </member>
+        <member name="M:pacman.MenuState.createMenuState">
+            <summary>
+            Creates all user interface elements of the state.
+            </summary>
+        </member>
+        <member name="T:pacman.RulesState">
+            <summary>
+            The <code>RulesState</code> class is responsible
+            for creating and rendering the Rules state.
+            </summary>
+        </member>
+        <member name="M:pacman.RulesState.#ctor(pacman.Handler)">
+            <summary>
+            Constructor of the <c>RulesState</c> class.
+            It calls the base constructor and then calls the
+            <c>createRulesState</c> method to initialize
+            the appearance of the state.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+        </member>
+        <member name="M:pacman.RulesState.createRulesState">
+            <summary>
+            Creates all user interface elements of the state.
+            </summary>
+        </member>
+        <member name="T:pacman.EndState">
+            <summary>
+            <c>EndState</c> is an abstract class responsible
+            for creating and rendering the end states.
+            </summary>
+        </member>
+        <member name="M:pacman.EndState.#ctor(pacman.Handler,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Constructor of the <c>EndState</c> abstract class.
+            It calls the base constructor and then calls the
+            <c>createEndState</c> method to initialize
+            the appearance of the state.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+            <param name="image">an image displayed on top of the window</param>
+        </member>
+        <member name="M:pacman.EndState.createEndState">
+            <summary>
+            Creates all user interface elements of the state.
+            </summary>
+        </member>
+        <member name="M:pacman.EndState.tick">
+            <summary>
+            Updates score count and all other user interface elements.
+            </summary>
+        </member>
+        <member name="T:pacman.GameOverState">
+            <summary>
+            The <c>GameOverState</c> class is responsible
+            for loading <c>game_over</c> image into
+            <c>EndState</c> abstract class.
+            </summary>
+        </member>
+        <member name="T:pacman.WinState">
+            <summary>
+            The <c>WinState</c> class is responsible
+            for loading <c>win</c> image into
+            <c>EndState</c> abstract class.
+            </summary>
+        </member>
+        <member name="T:pacman.Tile">
+            <summary>
+            The Tile class holds data for a single map tile.
+            </summary>
+        </member>
+        <member name="M:pacman.Tile.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32)">
+            <summary>
+            Constructor of the Tile class. It takes the image
+            that the tile is rendered with and a unique Tile type
+            id.
+            </summary>
+            <param name="texture">an image of the tile</param>
+            <param name="id">unique id depending on tile type</param>
+        </member>
+        <member name="M:pacman.Tile.render(Microsoft.Xna.Framework.Graphics.SpriteBatch,System.Int32,System.Int32)">
+            <summary>
+            Draws this tile's image on given coordinates.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+            <param name="x">x-coordinate to draw the image</param>
+            <param name="y">y-coordinate to draw the image</param>
+        </member>
+        <member name="M:pacman.Tile.isObstacle">
+            <summary>
+            Gets obstacle status of this tile.
+            </summary>
+            <returns>obstacle status of this tile</returns>
+        </member>
+        <member name="M:pacman.Tile.getId">
+            <summary>
+            Gets id of this tile.
+            </summary>
+            <returns>id of this tile</returns>
+        </member>
+        <member name="T:pacman.Empty">
+            <summary>
+            The Empty tile class holds data for empty tiles.
+            </summary>
+        </member>
+        <member name="M:pacman.Empty.#ctor(System.Int32)">
+            <summary>
+            Constructor of the Empty tile class. It takes
+            the empty tile's unique id as parameter.
+            </summary>
+            <param name="id">empty tile id</param>
+        </member>
+        <member name="T:pacman.Wall">
+            <summary>
+            The Wall tile class holds data for wall tiles.
+            </summary>
+        </member>
+        <member name="M:pacman.Wall.#ctor(System.Int32)">
+            <summary>
+            Constructor of the Wall tile class. It takes
+            the wall tile's unique id as parameter.
+            </summary>
+            <param name="id">wall tile id</param>
+        </member>
+        <member name="M:pacman.Wall.isObstacle">
+            <inheritdoc/>
+        </member>
+        <member name="T:pacman.Timing">
+            <summary>
+            Provides static methods for working with time in this program.
+            </summary>
+        </member>
+        <member name="M:pacman.Timing.Now">
+            <summary>
+            Returns this moment's millisecond count.
+            </summary>
+            <returns>this moment's millisecond count</returns>
+        </member>
+        <member name="T:pacman.KeyManager">
+            <summary>
+            The <c>KeyManager</c> class is responsible
+            for getting user keyboard input.
+            </summary>
+        </member>
+        <member name="M:pacman.KeyManager.#ctor">
+            <summary>
+            Constructor of the <c>KeyManager</c> class.
+            </summary>
+        </member>
+        <member name="M:pacman.KeyManager.tick">
+            <summary>
+            Updates pressed arrow keys.
+            </summary>
+        </member>
+        <member name="M:pacman.KeyManager.keyPressed(Microsoft.Xna.Framework.Input.KeyboardState)">
+            <summary>
+            Updates pressed keys array.
+            </summary>
+            <param name="state">a KeyboardState representing the current
+                                pressed keys</param>
+        </member>
+        <member name="M:pacman.KeyManager.resetKeys">
+            <summary>
+            Resets all pressed keys, so that none is seen as pressed.
+            </summary>
+        </member>
+        <member name="M:pacman.MouseManager.tick">
+            <summary>
+            Updates mouse variables.
+            </summary>
+        </member>
+        <member name="M:pacman.MouseManager.mousePressed(Microsoft.Xna.Framework.Input.MouseState)">
+            <summary>
+            Stores the pressed button to local variable.
+            </summary>
+            <param name="state">current mouse state</param>
+        </member>
+        <member name="M:pacman.MouseManager.mouseReleased(Microsoft.Xna.Framework.Input.MouseState)">
+            <summary>
+            Stores the unpressed button to local variable.
+            </summary>
+            <param name="state">current mouse state</param>
+        </member>
+        <member name="M:pacman.MouseManager.mouseMoved(Microsoft.Xna.Framework.Input.MouseState)">
+            <summary>
+            Stores mouse current coordinates to local variables.
+            </summary>
+            <param name="state">current mouse state</param>
+        </member>
+        <member name="M:pacman.MouseManager.setManager(pacman.UserInterfaceManager)">
+            <summary>
+            Sets the user interface manager.
+            </summary>
+            <param name="manager">new user interface manager</param>
+        </member>
+        <member name="T:pacman.UserInterfaceManager">
+            <summary>
+            The <c>UserInterfaceManager</c> class is responsible
+            for updating and rendering all UI objects present in the game.
+            </summary>
+        </member>
+        <member name="M:pacman.UserInterfaceManager.#ctor(pacman.Handler)">
+            <summary>
+            Constructor of the <c>UserInterfaceManager</c> class.
+            It takes the game handler, for having access to all elements
+            of the game, as a parameter. It also initializes the
+            <c>objects</c> array.
+            </summary>
+            <param name="handler">game handler for accessing other elements
+                                  of the game</param>
+        </member>
+        <member name="M:pacman.UserInterfaceManager.tick">
+            <summary>
+            Updates all objects in the <c>objects</c> array.
+            </summary>
+        </member>
+        <member name="M:pacman.UserInterfaceManager.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws all objects from the <c>objects</c> array.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="M:pacman.UserInterfaceManager.onMouseMove(Microsoft.Xna.Framework.Input.MouseState)">
+            <summary>
+            Performs actions on mouse move on all objects
+            from the <c>objects</c> array.
+            </summary>
+            <param name="state">current mouse state</param>
+        </member>
+        <member name="M:pacman.UserInterfaceManager.onMouseRelease(Microsoft.Xna.Framework.Input.MouseState)">
+            <summary>
+            Performs actions on mouse release on all objects
+            from the <c>objects</c> array.
+            </summary>
+            <param name="state">current mouse state</param>
+        </member>
+        <member name="M:pacman.UserInterfaceManager.addObject(pacman.UserInterfaceObject)">
+            <summary>
+            Adds UI object to the <c>objects</c> array.
+            </summary>
+            <param name="o">the object to be added</param>
+        </member>
+        <member name="M:pacman.UserInterfaceManager.getHandler">
+            <summary>
+            Gets the game handler.
+            </summary>
+            <returns>the game handler</returns>
+        </member>
+        <member name="M:pacman.UserInterfaceManager.setHandler(pacman.Handler)">
+            <summary>
+            Sets the game handler.
+            </summary>
+            <param name="handler">new game handler</param>
+        </member>
+        <member name="T:pacman.UserInterfaceObject">
+            <summary>
+            <c>UserInterfaceObject</c> is an abstract class for
+            all different types of user interface elements in the game.
+            </summary>
+        </member>
+        <member name="M:pacman.UserInterfaceObject.#ctor(System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            Constructor of the abstract UI object class always
+            called by all UI objects present in the game.
+            It takes x and y-coordinates of upper left corner
+            of the object and its width and height as parameters.
+            It also initializes the bounding rectangle.
+            </summary>
+            <param name="x">x-coordinate of the upper left corner</param>
+            <param name="y">y-coordinate of the upper left corner</param>
+            <param name="width">object width</param>
+            <param name="height">object height</param>
+        </member>
+        <member name="M:pacman.UserInterfaceObject.onMouseMove(Microsoft.Xna.Framework.Input.MouseState)">
+            <summary>
+            Sets hover variable to <c>true</c> if mouse
+            position is within the bounding rectangle.
+            </summary>
+            <param name="state">current mouse state</param>
+        </member>
+        <member name="M:pacman.UserInterfaceObject.onMouseRelease(Microsoft.Xna.Framework.Input.MouseState)">
+            <summary>
+            Calls the <c>onClick</c> method is mouse is released
+            when within the bounding rectangle.
+            </summary>
+            <param name="state">current mouse state</param>
+        </member>
+        <member name="M:pacman.UserInterfaceObject.getX">
+            <summary>
+            Gets x-coordinate.
+            </summary>
+            <returns>x-coordinate</returns>
+        </member>
+        <member name="M:pacman.UserInterfaceObject.setX(System.Single)">
+            <summary>
+            Sets x-coordinate.
+            </summary>
+            <param name="x">new x-coordinate</param>
+        </member>
+        <member name="M:pacman.UserInterfaceObject.getY">
+            <summary>
+            Gets y-coordinate.
+            </summary>
+            <returns>y-coordinate</returns>
+        </member>
+        <member name="M:pacman.UserInterfaceObject.setY(System.Single)">
+            <summary>
+            Sets y-coordinate.
+            </summary>
+            <param name="y">new y-coordinate</param>
+        </member>
+        <member name="M:pacman.UserInterfaceObject.getWidth">
+            <summary>
+            Gets object width.
+            </summary>
+            <returns>object width</returns>
+        </member>
+        <member name="M:pacman.UserInterfaceObject.setWidth(System.Int32)">
+            <summary>
+            Sets object width.
+            </summary>
+            <param name="width">new object width</param>
+        </member>
+        <member name="M:pacman.UserInterfaceObject.getHeight">
+            <summary>
+            Gets object height.
+            </summary>
+            <returns>object height</returns>
+        </member>
+        <member name="M:pacman.UserInterfaceObject.setHeight(System.Int32)">
+            <summary>
+            Sets object height.
+            </summary>
+            <param name="height">new object height</param>
+        </member>
+        <member name="T:pacman.UserInterfaceButton">
+            <summary>
+            The <c>UserInterfaceButton</c> class is responsible
+            for actions and rendering of all buttons in the game.
+            </summary>
+        </member>
+        <member name="M:pacman.UserInterfaceButton.#ctor(System.Single,System.Single,System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.Texture2D[],pacman.ClickListener)">
+            <summary>
+            Constructor of the <c>UserInterfaceButton</c> class.
+            It takes two more parameters than the base constructor -
+            an array of images containing images for non-hover and hover
+            appearance of the button, and an implementation of
+            <c>ClickListener</c> delegate.
+            </summary>
+            <param name="x">x-coordinate of the upper left corner</param>
+            <param name="y">y-coordinate of the upper left corner</param>
+            <param name="width">button width</param>
+            <param name="height">button height</param>
+            <param name="images">an array of images containing non-hover and hover
+                                 appearance of the button</param>
+            <param name="clicker">an implementation of the <c>ClickListener</c>
+                                  delegate</param>
+        </member>
+        <member name="M:pacman.UserInterfaceButton.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws button image depending on the hover status.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="M:pacman.UserInterfaceButton.onClick">
+            <summary>
+            Performs an action when the button is clicked.
+            </summary>
+        </member>
+        <member name="T:pacman.UserInterfaceCenteredString">
+            <summary>
+            The <c>UserInterfaceCenteredString</c> class is responsible
+            for actions and rendering of all labels in the game, whose texts are
+            aligned to center.
+            </summary>
+        </member>
+        <member name="M:pacman.UserInterfaceCenteredString.#ctor(System.Single,System.Int32,System.String)">
+            <summary>
+            Constructor of the <c>UserInterfaceCenteredString</c> class.
+            It takes the y-coordinate of the upper left corner, the width and
+            the label text as parameters.
+            </summary>
+            <param name="y">y-coordinate of the upper left corner</param>
+            <param name="width">label width</param>
+            <param name="text">a string containing the text of the label</param>
+        </member>
+        <member name="M:pacman.UserInterfaceCenteredString.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Calculates pixel size of the string and draws in on the screen.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the text</param>
+        </member>
+        <member name="M:pacman.UserInterfaceCenteredString.setText(System.String)">
+            <summary>
+            Sets the label text.
+            </summary>
+            <param name="text">new label text</param>
+        </member>
+        <member name="T:pacman.UserInterfaceImage">
+            <summary>
+            The <c>UserInterfaceImage</c> class is responsible
+            for actions and rendering of all non-play images in the game.
+            </summary>
+        </member>
+        <member name="M:pacman.UserInterfaceImage.#ctor(System.Single,System.Single,System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.Texture2D)">
+            <summary>
+            Constructor of the <c>UserInterfaceImage</c> class.
+            It takes one more parameter than the super constructor -
+            an image to be drawn on the screen.
+            </summary>
+            <param name="x">x-coordinate of the upper left corner</param>
+            <param name="y">y-coordinate of the upper left corner</param>
+            <param name="width">button width</param>
+            <param name="height">button height</param>
+            <param name="image">an image</param>
+        </member>
+        <member name="M:pacman.UserInterfaceImage.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws the image.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the images</param>
+        </member>
+        <member name="T:pacman.UserInterfaceLabel">
+            <summary>
+            The <c>UserInterfaceLabel</c> class is responsible
+            for actions and rendering of all labels in the game.
+            </summary>
+        </member>
+        <member name="M:pacman.UserInterfaceLabel.#ctor(System.Single,System.Single,System.String,System.String)">
+            <summary>
+            Constructor of the <c>UserInterfaceLabel</c> class.
+            It takes x and y-coordiantes of the upper left corner,
+            a fixed text and a changeable text as parameters.
+            </summary>
+            <param name="x">x-coordinate of the upper left corner</param>
+            <param name="y">y-coordinate of the upper left corner</param>
+            <param name="fixedText">a string with the fixed text</param>
+            <param name="changeable">a string with the changeable text</param>
+        </member>
+        <member name="M:pacman.UserInterfaceLabel.render(Microsoft.Xna.Framework.Graphics.SpriteBatch)">
+            <summary>
+            Draws the label on the screen.
+            </summary>
+            <param name="sb">SpriteBatch instance to draw the text</param>
+        </member>
+        <member name="M:pacman.UserInterfaceLabel.setChangeable(System.String)">
+            <summary>
+            Sets the changeable text.
+            </summary>
+            <param name="changeable">new changeable text</param>
+        </member>
+    </members>
+</doc>
