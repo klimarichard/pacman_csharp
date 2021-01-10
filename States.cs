@@ -132,7 +132,10 @@ namespace pacman {
                 {
                     State.setState(handler.getGame().menuState);
                     if (!handler.getAudio().isPlayingMenu())
-                        handler.getAudio().playSong(Assets.menuLoop);
+                    {
+                        Thread t = new Thread(() => handler.getAudio().playSong(Assets.menuLoop, true));
+                        t.Start();
+                    }
                     handler.getMouseManager().setManager(State.getState().getManager());
                 }));
 
@@ -304,7 +307,10 @@ namespace pacman {
                     {
                         State.setState(handler.getGame().menuState);
                         if (!handler.getAudio().isPlayingMenu())
-                            handler.getAudio().playSong(Assets.menuLoop);
+                        {
+                            Thread t = new Thread(() => handler.getAudio().playSong(Assets.menuLoop, true));
+                            t.Start();
+                        }
                         handler.getMouseManager().setManager(State.getState().getManager());
                     }
                     ));
@@ -422,7 +428,10 @@ namespace pacman {
                     {
                         State.setState(handler.getGame().menuState);
                         if (!handler.getAudio().isPlayingMenu())
-                            handler.getAudio().playSong(Assets.menuLoop);
+                        {
+                            Thread t = new Thread(() => handler.getAudio().playSong(Assets.menuLoop, true));
+                            t.Start();
+                        }
                         handler.getMouseManager().setManager(State.getState().getManager());
                     }));
         }
@@ -468,7 +477,10 @@ namespace pacman {
                     {
                         State.setState(handler.getGame().menuState);
                         if (!handler.getAudio().isPlayingMenu())
-                            handler.getAudio().playSong(Assets.menuLoop);
+                        {
+                            Thread t = new Thread(() => handler.getAudio().playSong(Assets.menuLoop, true));
+                            t.Start();
+                        }
                         handler.getMouseManager().setManager(State.getState().getManager());
                         handler.resetGame();
                     }));

@@ -104,7 +104,8 @@ namespace pacman {
 
         protected override void BeginRun()
         {
-            handler.getAudio().playSong(Assets.menuLoop);
+            Thread t = new Thread(() => handler.getAudio().playSong(Assets.menuLoop, true));
+            t.Start();
             base.BeginRun();
         }
 
