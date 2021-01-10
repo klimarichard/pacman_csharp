@@ -134,6 +134,8 @@ namespace pacman {
         /// </summary>
         /// <param name="manager">new user interface manager</param>
         public void setManager(UserInterfaceManager manager) {
+            leftPressed = false;
+            rightPressed = false;
             this.manager = manager;
         }
     }

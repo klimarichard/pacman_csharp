@@ -7,6 +7,7 @@
     public class Handler {
         private MyGame game;
         private Map map;
+        private Audio audio;
 
         /// <summary>
         /// Constructor of the <c>Handler</c> class.
@@ -15,6 +16,7 @@
         /// <param name="game">the game</param>
         public Handler(MyGame game) {
             this.game = game;
+            audio = new Audio();
         }
 
         /// <summary>
@@ -80,6 +82,15 @@
         /// <param name="map">new game map</param>
         public void setMap(Map map) {
             this.map = map;
+        }
+
+        /// <summary>
+        /// Gets the game audio class.
+        /// </summary>
+        /// <returns>audio class of the game</returns>
+        public Audio getAudio()
+        {
+            return audio;
         }
 
         #endregion

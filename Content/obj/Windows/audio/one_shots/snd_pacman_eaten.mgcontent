@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/one_shots/snd_pacman_eaten.wav</SourceFile>
+  <SourceTime>2021-01-10T17:33:09.3920732+01:00</SourceTime>
+  <DestFile>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/bin/Windows/audio/one_shots/snd_pacman_eaten.xnb</DestFile>
+  <DestTime>2021-01-10T18:13:55.027099+01:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2017-03-01T16:05:36+01:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

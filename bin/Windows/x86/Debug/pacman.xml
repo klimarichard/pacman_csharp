@@ -4,6 +4,49 @@
         <name>pacman</name>
     </assembly>
     <members>
+        <member name="T:pacman.Audio">
+            <summary>
+            The <c>Audio</c> class takes care of all music and sounds
+            being played in the game.
+            </summary>
+        </member>
+        <member name="M:pacman.Audio.#ctor">
+            <summary>
+            Constructor of the <c>Audio</c> class. It sets the main volume
+            and initializes class variables.
+            </summary>
+        </member>
+        <member name="M:pacman.Audio.playSong(Microsoft.Xna.Framework.Media.Song)">
+            <summary>
+            Plays given non-repeating song.
+            </summary>
+            <param name="song">the song to be played</param>
+        </member>
+        <member name="M:pacman.Audio.playSong(Microsoft.Xna.Framework.Media.Song,System.Boolean)">
+            <summary>
+            Plays given song and sets repeatability.
+            </summary>
+            <param name="song">the song to be played</param>
+            <param name="loop">repeatability of the song</param>
+        </member>
+        <member name="M:pacman.Audio.playOneShot(Microsoft.Xna.Framework.Audio.SoundEffect)">
+            <summary>
+            Plays given sound effect.
+            </summary>
+            <param name="soundEffect">the sound effect to be played</param>
+        </member>
+        <member name="M:pacman.Audio.isPlaying">
+            <summary>
+            Gets current playing status.
+            </summary>
+            <returns><c>true</c>, if music is playing, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:pacman.Audio.isPlayingMenu">
+            <summary>
+            Gets current menu playing status.
+            </summary>
+            <returns><c>true</c>, if menu music is playing, <c>false</c> otherwise</returns>
+        </member>
         <member name="T:pacman.EntityManager">
             <summary>
             <c>EntityManager</c> is a class that holds all entities present
@@ -1102,6 +1145,12 @@
             </summary>
             <param name="map">new game map</param>
         </member>
+        <member name="M:pacman.Handler.getAudio">
+            <summary>
+            Gets the game audio class.
+            </summary>
+            <returns>audio class of the game</returns>
+        </member>
         <member name="T:pacman.LevelLoader">
             <summary>
             The <c>LevelLoader</c> class controls loading of the level map
@@ -1462,6 +1511,12 @@
             </summary>
             <returns>user interface manager</returns>
         </member>
+        <member name="M:pacman.State.getLevel">
+            <summary>
+            Gets current level of the game.
+            </summary>
+            <returns>current level</returns>
+        </member>
         <member name="T:pacman.GameState">
             <summary>
             The <c>GameState</c> class is responsible
@@ -1510,6 +1565,12 @@
             Gets the map.
             </summary>
             <returns>the map</returns>
+        </member>
+        <member name="M:pacman.GameState.getLevel">
+            <summary>
+            Gets current level of the game.
+            </summary>
+            <returns>current level</returns>
         </member>
         <member name="T:pacman.AboutState">
             <summary>

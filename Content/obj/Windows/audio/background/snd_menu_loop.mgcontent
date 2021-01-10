@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_menu_loop.ogg</SourceFile>
+  <SourceTime>2021-01-10T21:00:45.6177827+01:00</SourceTime>
+  <DestFile>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/bin/Windows/audio/background/snd_menu_loop.xnb</DestFile>
+  <DestTime>2021-01-10T21:03:58.5410241+01:00</DestTime>
+  <Importer>OggImporter</Importer>
+  <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2017-03-01T16:05:36+01:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/bin/Windows/audio/background/snd_menu_loop.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>

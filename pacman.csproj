@@ -57,9 +57,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Audio.cs" />
     <Compile Include="Entities.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="Graphics.cs" />
+    <Compile Include="Resources.cs" />
     <Compile Include="Handler.cs" />
     <Compile Include="LevelLoader.cs" />
     <Compile Include="Map.cs" />

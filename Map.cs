@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
+using System.Threading;
+
 namespace pacman {
     /// <summary>
     /// The <c>Map</c> class is the class responsible for
@@ -190,6 +192,7 @@ namespace pacman {
                     // PacMan lost all of his lives, game is over
                     if (handler.getGame().getLives() == 0) {
                         State.setState(new GameOverState(handler));
+                        handler.getAudio().playSong(Assets.gameOver);
                         handler.getMouseManager().setManager(State.getState().getManager());
                     }
                     setEatingPacMan(false, null);
@@ -417,6 +420,8 @@ namespace pacman {
             this.eatingPacMan = eatingPacMan;
             entityManager.setPacManEater(e);
             if (eatingPacMan) {
+                Thread t = new Thread(() => handler.getAudio().playOneShot(Assets.pacmanEaten));
+                t.Start();
                 eatingInnerTimer = 0;
                 eatingTimer = 1500;
                 eatingLastTime = Timing.Now();

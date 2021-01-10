@@ -156,3 +156,81 @@
 /processorParam:TextureFormat=Color
 /build:about_game.png
 
+#begin audio/background/snd_game_over.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/background/snd_game_over.ogg
+
+#begin audio/background/snd_level1.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/background/snd_level1.ogg
+
+#begin audio/background/snd_level2.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/background/snd_level2.ogg
+
+#begin audio/background/snd_level3.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/background/snd_level3.ogg
+
+#begin audio/background/snd_level4.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/background/snd_level4.ogg
+
+#begin audio/background/snd_level5.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/background/snd_level5.ogg
+
+#begin audio/background/snd_level6.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/background/snd_level6.ogg
+
+#begin audio/background/snd_level7.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/background/snd_level7.ogg
+
+#begin audio/background/snd_you_won.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/background/snd_you_won.ogg
+
+#begin audio/one_shots/snd_ghost_eaten.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/one_shots/snd_ghost_eaten.wav
+
+#begin audio/one_shots/snd_pacman_eaten.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/one_shots/snd_pacman_eaten.wav
+
+#begin audio/background/snd_menu.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/background/snd_menu.ogg
+
+#begin audio/background/snd_menu_loop.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:audio/background/snd_menu_loop.ogg
+

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/fonts/centeredString.spritefont</SourceFile>
-  <SourceTime>2020-09-23T03:33:00.9144254+02:00</SourceTime>
-  <DestFile>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/bin/Windows/fonts/centeredString.xnb</DestFile>
-  <DestTime>2020-09-23T12:17:54.7501869+02:00</DestTime>
+  <SourceFile>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/fonts/centeredString.spritefont</SourceFile>
+  <SourceTime>2021-01-10T17:42:28.3326329+01:00</SourceTime>
+  <DestFile>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/bin/Windows/fonts/centeredString.xnb</DestFile>
+  <DestTime>2021-01-10T17:49:14.539702+01:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

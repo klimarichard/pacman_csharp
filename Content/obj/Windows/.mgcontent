@@ -4,16 +4,29 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/arrow_keys.png</File>
-    <File>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/buttons.png</File>
-    <File>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/game_over.png</File>
-    <File>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/pacman.png</File>
-    <File>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/rules_controls.png</File>
-    <File>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/textures.png</File>
-    <File>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/title.png</File>
-    <File>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/win.png</File>
-    <File>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/fonts/centeredString.spritefont</File>
-    <File>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/fonts/normalFont.spritefont</File>
-    <File>H:/School/MatFyz/19_ZS/Jazyk C# a platforma .NET/pacman/Content/about_game.png</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/arrow_keys.png</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/buttons.png</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/game_over.png</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/pacman.png</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/rules_controls.png</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/textures.png</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/title.png</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/win.png</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/fonts/centeredString.spritefont</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/fonts/normalFont.spritefont</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/about_game.png</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_game_over.ogg</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_level1.ogg</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_level2.ogg</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_level3.ogg</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_level4.ogg</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_level5.ogg</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_level6.ogg</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_level7.ogg</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_you_won.ogg</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/one_shots/snd_ghost_eaten.wav</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/one_shots/snd_pacman_eaten.wav</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_menu.ogg</File>
+    <File>D:/klima/Documents/GitHub/pacman_csharp/pacman_csharp/Content/audio/background/snd_menu_loop.ogg</File>
   </SourceFiles>
 </SourceFileCollection>

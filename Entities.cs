@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -1337,6 +1338,8 @@ namespace pacman {
             if (alive) {
                 immuneToBlue = true;
             } else {
+                Thread t = new Thread(() => handler.getAudio().playOneShot(Assets.ghostEaten));
+                t.Start();
                 handler.getGame().setScore(handler.getGame().getScore() + 200);
                 resurrectionTimer = 100;
             }

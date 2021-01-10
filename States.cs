@@ -1,5 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
+
+using System.Threading;
 
 namespace pacman {
     /// <summary>
@@ -49,7 +52,7 @@ namespace pacman {
         public static void setState(State state) {
             // game should start exactly where we left off
             if (typeof(GameState).IsAssignableFrom(state.GetType()))
-                ((GameState) state).getMap().setLastTime(Timing.Now());
+                ((GameState)state).getMap().setLastTime(Timing.Now());
             currentState = state;
         }
 
@@ -74,6 +77,15 @@ namespace pacman {
         /// <returns>user interface manager</returns>
         public UserInterfaceManager getManager() {
             return manager;
+        }
+
+        /// <summary>
+        /// Gets current level of the game.
+        /// </summary>
+        /// <returns>current level</returns>
+        internal int getLevel()
+        {
+            return handler.getGame().getGameState().getLevel();
         }
     }
 
@@ -119,6 +131,8 @@ namespace pacman {
                 () =>
                 {
                     State.setState(handler.getGame().menuState);
+                    if (!handler.getAudio().isPlayingMenu())
+                        handler.getAudio().playSong(Assets.menuLoop);
                     handler.getMouseManager().setManager(State.getState().getManager());
                 }));
 
@@ -169,10 +183,13 @@ namespace pacman {
             // there are only seven levels, if the player wins the seventh, he wins the game
             if (level > 7) {
                 State.setState(new WinState(handler));
+                handler.getAudio().playSong(Assets.youWon);
                 handler.getMouseManager().setManager(State.getState().getManager());
             } else {
                 map = new Map(handler, level);
                 handler.setMap(map);
+                Thread t = new Thread(() => handler.getAudio().playSong(Assets.levelMusic[level - 1], true));
+                t.Start();
             }
         }
 
@@ -238,6 +255,15 @@ namespace pacman {
         public Map getMap() {
             return map;
         }
+
+        /// <summary>
+        /// Gets current level of the game.
+        /// </summary>
+        /// <returns>current level</returns>
+        internal int getLevel()
+        {
+            return level;
+        }
     }
 
     /// <summary>
@@ -277,6 +303,8 @@ namespace pacman {
                     () =>
                     {
                         State.setState(handler.getGame().menuState);
+                        if (!handler.getAudio().isPlayingMenu())
+                            handler.getAudio().playSong(Assets.menuLoop);
                         handler.getMouseManager().setManager(State.getState().getManager());
                     }
                     ));
@@ -317,6 +345,8 @@ namespace pacman {
                     {
                         State.setState(handler.getGame().gameState);
                         handler.getMouseManager().setManager(State.getState().getManager());
+                        Thread t = new Thread(() => handler.getAudio().playSong(Assets.levelMusic[handler.getGame().getGameState().getLevel() - 1], true));
+                        t.Start();
                     }));
 
             // rules & controls button
@@ -380,6 +410,8 @@ namespace pacman {
                     BUTTON_WIDTH, BUTTON_HEIGHT, Assets.playButton, () =>
                     {
                         State.setState(handler.getGame().gameState);
+                        Thread t = new Thread(() => handler.getAudio().playSong(Assets.levelMusic[handler.getGame().getGameState().getLevel() - 1], true));
+                        t.Start();
                         handler.getMouseManager().setManager(State.getState().getManager());
                     }));
 
@@ -389,6 +421,8 @@ namespace pacman {
                     BUTTON_WIDTH, BUTTON_HEIGHT, Assets.menuButton, () =>
                     {
                         State.setState(handler.getGame().menuState);
+                        if (!handler.getAudio().isPlayingMenu())
+                            handler.getAudio().playSong(Assets.menuLoop);
                         handler.getMouseManager().setManager(State.getState().getManager());
                     }));
         }
@@ -433,6 +467,8 @@ namespace pacman {
                     Assets.menuButton, () =>
                     {
                         State.setState(handler.getGame().menuState);
+                        if (!handler.getAudio().isPlayingMenu())
+                            handler.getAudio().playSong(Assets.menuLoop);
                         handler.getMouseManager().setManager(State.getState().getManager());
                         handler.resetGame();
                     }));

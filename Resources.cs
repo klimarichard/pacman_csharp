@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace pacman {
     /// <summary>
@@ -22,6 +24,10 @@ namespace pacman {
         public static Texture2D enemyBlue, enemyPink, enemyPurple, enemyRed, enemyYellow, enemyDead;
         public static Texture2D foodNormal, foodKiller, foodBanana, foodCherry, foodStrawberry;
         public static Texture2D empty, wall;
+
+        public static Song menu, menuLoop, gameOver, youWon;
+        public static Song[] levelMusic;
+        public static SoundEffect pacmanEaten, ghostEaten;
 
         public static SpriteFont centeredStringFont, normalFont;
 
@@ -113,6 +119,25 @@ namespace pacman {
 
             wall = sheet.crop(4 * SIZE, 4 * SIZE, SIZE, SIZE);
             empty = new Texture2D(wall.GraphicsDevice, 40, 40);
+
+            // load all music played in the game
+            menu = content.Load<Song>("audio/background/snd_menu");
+            menuLoop = content.Load<Song>("audio/background/snd_menu_loop");
+
+            levelMusic = new Song[7];
+            levelMusic[0] = content.Load<Song>("audio/background/snd_level1");
+            levelMusic[1] = content.Load<Song>("audio/background/snd_level2");
+            levelMusic[2] = content.Load<Song>("audio/background/snd_level3");
+            levelMusic[3] = content.Load<Song>("audio/background/snd_level4");
+            levelMusic[4] = content.Load<Song>("audio/background/snd_level5");
+            levelMusic[5] = content.Load<Song>("audio/background/snd_level6");
+            levelMusic[6] = content.Load<Song>("audio/background/snd_level7");
+
+            gameOver = content.Load<Song>("audio/background/snd_game_over");
+            youWon = content.Load<Song>("audio/background/snd_you_won");
+
+            pacmanEaten = content.Load<SoundEffect>("audio/one_shots/snd_pacman_eaten");
+            ghostEaten = content.Load<SoundEffect>("audio/one_shots/snd_ghost_eaten");
 
             // load all fonts used in texts displayed on screen
             centeredStringFont = content.Load<SpriteFont>("fonts/centeredString");

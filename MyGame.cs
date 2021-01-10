@@ -1,5 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
+
+using System.Threading;
 
 namespace pacman {
     /// <summary>
@@ -97,6 +100,12 @@ namespace pacman {
         /// </summary>
         protected override void UnloadContent() {
             base.UnloadContent();
+        }
+
+        protected override void BeginRun()
+        {
+            handler.getAudio().playSong(Assets.menuLoop);
+            base.BeginRun();
         }
 
         /// <summary>
